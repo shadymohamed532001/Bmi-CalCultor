@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 class Bmi_Screan extends StatefulWidget {
@@ -9,8 +10,9 @@ class Bmi_Screan extends StatefulWidget {
 
 class _Bmi_ScreanState extends State<Bmi_Screan> {
   double Hight = 0;
-  int Wight  = 0;
+  int Wight = 55;
   int Age = 0;
+  double ? Result ;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -159,9 +161,10 @@ class _Bmi_ScreanState extends State<Bmi_Screan> {
                         const SizedBox(
                           height: 5,
                         ),
-                         Text(
-                          '${Wight}',
-                          style: TextStyle(color: Colors.white, fontSize: 55),
+                        Text(
+                          '$Wight',
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 55),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20)
@@ -176,7 +179,7 @@ class _Bmi_ScreanState extends State<Bmi_Screan> {
                                 child: IconButton(
                                     onPressed: () {
                                       setState(() {
-                                        Wight-- ;
+                                        Wight--;
                                       });
                                     },
                                     icon: const Icon(Icons.remove)),
@@ -188,7 +191,7 @@ class _Bmi_ScreanState extends State<Bmi_Screan> {
                                 child: IconButton(
                                     onPressed: () {
                                       setState(() {
-                                        Wight++ ;
+                                        Wight++;
                                       });
                                     },
                                     icon: const Icon(Icons.add)),
@@ -222,9 +225,10 @@ class _Bmi_ScreanState extends State<Bmi_Screan> {
                         const SizedBox(
                           height: 5,
                         ),
-                         Text(
-                         '${Age}' ,
-                          style: TextStyle(color: Colors.white, fontSize: 55),
+                        Text(
+                          '$Age',
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 55),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20)
@@ -239,7 +243,7 @@ class _Bmi_ScreanState extends State<Bmi_Screan> {
                                 child: IconButton(
                                     onPressed: () {
                                       setState(() {
-                                        Wight-- ;
+                                        Age--;
                                       });
                                     },
                                     icon: const Icon(Icons.remove)),
@@ -251,7 +255,7 @@ class _Bmi_ScreanState extends State<Bmi_Screan> {
                                 child: IconButton(
                                     onPressed: () {
                                       setState(() {
-                                        Wight++ ;
+                                        Age++;
                                       });
                                     },
                                     icon: const Icon(Icons.add)),
@@ -269,25 +273,57 @@ class _Bmi_ScreanState extends State<Bmi_Screan> {
           const SizedBox(
             height: 5,
           ),
-          Container(
-            margin: EdgeInsets.all(10),
-            width: double.infinity,
-            height: 80,
-            decoration: BoxDecoration(
-                color: Color(0xffec1455),
-              borderRadius: BorderRadius.circular(24)
-            ),
-            child: Center(
-              child: Text(
-                'CalCulate ',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30
+          GestureDetector(
+            onTap: () {
+              Result = (Hight / Age *2 );
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Container(
+                  margin: const EdgeInsets.only(
+                    bottom: 400
+                  ),
+                  padding: const EdgeInsets.all(16),
+                  height: 150,
+                  decoration: BoxDecoration(
+                      color: const Color(0xffec1455),
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:  [
+                      const Text('The Result ',style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20
+                      ),),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text('The Result of Bmi = ${Result!} ',style: const TextStyle(
+                          color: Colors.white,
+                        fontSize: 20
+                      ),),
+
+                    ],
+                  ),
+                ),
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              ));
+            },
+            child: Container(
+              margin: const EdgeInsets.all(10),
+              width: double.infinity,
+              height: 80,
+              decoration: BoxDecoration(
+                  color: const Color(0xffec1455),
+                  borderRadius: BorderRadius.circular(24)),
+              child: const Center(
+                child: Text(
+                  'CalCulate ',
+                  style: TextStyle(color: Colors.white, fontSize: 30),
                 ),
               ),
             ),
           )
-
         ],
       ),
     );
